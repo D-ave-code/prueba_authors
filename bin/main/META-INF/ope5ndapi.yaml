@@ -1,0 +1,102 @@
+---
+openapi: 3.1.0
+info:
+  title: app-authors APIDc
+  version: 1.0-SNAPSHOT
+
+paths:
+  /authors:
+    get:
+      tags:
+        - Author Rest
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authors'
+    post:
+      tags:
+        - Author Rest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authors-Post'
+      responses:
+        "201":
+          description: Created
+  /authors/{id}:
+    get:
+      tags:
+        - Author Rest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+
+        "204":
+          description: No Content
+          content:
+            application/json: {"msg":ddd}
+
+    put:
+      tags:
+        - Author Rest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authors'
+      responses:
+        "204":
+          description: No Content
+    delete:
+      tags:
+        - Author Rest
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "204":
+          description: No Content
+components:
+  responses:
+    Notfound:
+      descripcion: (NotFound) no se econtro informacion
+  schemas:
+    Authors:
+      type: object
+      properties:
+        id:
+          format: int64
+          type: string
+
+        firstName:
+          type: string
+          description: aqui va el primer nombre
+        lastName:
+          type: string
+          description: aqui va el primer apellido
